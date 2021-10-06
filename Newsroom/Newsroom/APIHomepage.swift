@@ -7,13 +7,11 @@
 
 import Foundation
 
-// https://saurav.tech/NewsAPI/everything/cnn.json
-
+/// Enum representing web services
 enum API {
     
     case newsFeed
-    case addToFavourite(String)
-    
+    case addToFavourite(String) /// Sample API case to represent how this enum can be scaled to encorporate more requests
     
     var rawValue: URLRequest? {
         switch(self) {
@@ -27,19 +25,22 @@ enum API {
         }
     }
     
+    /// Configures base url component
     private var baseURLComponent: URLComponents {
         var components = URLComponents()
         components.scheme = "https"
         components.host = "saurav.tech"
         return components
     }
-        
+    
+    /// Provides news feed Api Url
     private var newsFeedURL: URL? {
         var component = self.baseURLComponent
         component.path = "/NewsAPI/everything/cnn.json"
         return component.url
     }
     
+    /// Provides add to favourite Api Url
     private func addToFavourite(articleID: String) -> URL? {
         var component = self.baseURLComponent
         component.path = "NewsAPI/addToFavourite/"
